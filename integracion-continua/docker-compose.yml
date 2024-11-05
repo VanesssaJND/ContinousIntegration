@@ -1,5 +1,5 @@
 services:
-  integracion-continua:
+  spring-api-rest:
     image: my-app:v1
     ports:
       - "8080:9191"
