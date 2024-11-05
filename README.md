@@ -17,14 +17,15 @@ El proyecto actual consiste en una API REST realizada con java y Spring Boot que
 ```
 
 # Paso 2
-- Construir la imagen de la API REST de Spring (Nuestra aplicación) usando un Dockerfile:
-  **Ejecutar comando 1:**
+- Construir la imagen de la API REST de Spring (Nuestra aplicación) usando un Dockerfile
+
+**Dockerfile:**
 ```bash
 FROM amazoncorretto:17-alpine
 COPY target/*.jar app.jar
 ENTRYPOINT ["java","-jar","/app.jar"]
 ```
-**Ejecutar comando 2:**
+**Ejecutar comando:**
 ```bash
 docker build -t my-app:v1 .
 ```
