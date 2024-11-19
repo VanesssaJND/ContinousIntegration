@@ -1,6 +1,7 @@
 HELP.md
-
-
+*/target/*
+/target
+/integracion-continua/target
 ### STS ###
 .apt_generated
 .classpath
