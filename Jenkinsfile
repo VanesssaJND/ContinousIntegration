@@ -24,16 +24,20 @@ pipeline {
             }
         }
     }
-    post{
+    post {
         success {
-            emailext ( subject: "Éxito en la construcción: ${env.JOB_NAME} [${env.BUILD_NUMBER}]",
-            body: """<p>El trabajo ${env.JOB_NAME} [${env.BUILD_NUMBER}] se ha completado con éxito.</p>""",
-            to: 'corsamps@gmail.com', 'otrocorreo@ejemplo.com' )
+            emailext(
+                subject: "Éxito en la construcción: ${env.JOB_NAME} [${env.BUILD_NUMBER}]",
+                body: """<p>El trabajo ${env.JOB_NAME} [${env.BUILD_NUMBER}] se ha completado con éxito.</p>""",
+                to: 'tu-correo@dominio.com'
+            )
         }
         failure {
-            emailext ( subject: "Error en la construcción: ${env.JOB_NAME} [${env.BUILD_NUMBER}]",
-            body: """<p>El trabajo ${env.JOB_NAME} [${env.BUILD_NUMBER}] ha fallado.</p>""",
-            to: 'corsamps@gmail.com' )
+            emailext(
+                subject: "Error en la construcción: ${env.JOB_NAME} [${env.BUILD_NUMBER}]",
+                body: """<p>El trabajo ${env.JOB_NAME} [${env.BUILD_NUMBER}] ha fallado.</p>""",
+                to: 'tu-correo@dominio.com'
+            )
         }
     }
 }
