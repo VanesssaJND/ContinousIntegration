@@ -16,7 +16,6 @@ pipeline {
         }
         stage('Proceso de deploy'){
             steps{
-                bat 'docker-compose --version'
                 dir('integracion-continua'){
                     bat 'docker build -t my-app:v1 .'
                    bat 'docker-compose up -d'
@@ -29,14 +28,14 @@ pipeline {
             emailext(
                 subject: "Éxito en la construcción: ${env.JOB_NAME} [${env.BUILD_NUMBER}]",
                 body: """<p>El trabajo ${env.JOB_NAME} [${env.BUILD_NUMBER}] se ha completado con éxito.</p>""",
-                to: 'tu-correo@dominio.com'
+                to: 'correo@dominio.com'
             )
         }
         failure {
             emailext(
                 subject: "Error en la construcción: ${env.JOB_NAME} [${env.BUILD_NUMBER}]",
                 body: """<p>El trabajo ${env.JOB_NAME} [${env.BUILD_NUMBER}] ha fallado.</p>""",
-                to: 'tu-correo@dominio.com'
+                to: 'correo@dominio.com'
             )
         }
     }
