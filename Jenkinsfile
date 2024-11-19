@@ -2,19 +2,19 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Build del proyecto') {
             steps {
                 dir('integracion-continua'){
                     bat 'mvn.cmd clean install -DskipTests'
                 }
             }
         }
-        stage('test'){
+        stage('Ejecucion de test del proyecto'){
             steps{
              echo 'Test no disponibles debido a que la app no cuenta con ellos'
             }
         }
-        stage('deploy'){
+        stage('Proceso de deploy'){
             steps{
                 bat 'docker-compose --version'
                 dir('integracion-continua'){
