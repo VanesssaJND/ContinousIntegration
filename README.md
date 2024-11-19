@@ -1,108 +1,52 @@
-# Entrega Proyecto 1 - Escenario 3
+# Entrega Proyecto 2 - Escenario 5
+## Introducción
+Este proyecto tiene como objetivo desarrollar una API-REST utilizando el framework Spring Boot, contenerizar la aplicación con Docker para asegurar su portabilidad y facilidad de despliegue, y automatizar el proceso de integración y despliegue continuo utilizando Jenkins.
 
-## Contexto del proyecto
+# Componentes del Proyecto
+## Spring Boot:
 
-El proyecto actual consiste en una API REST realizada con java y Spring Boot que maneja productos y categorias de producto y guarda la información en una base de datos MySQL.
+**Desarrollo de la API:** La API se desarrolla utilizando Spring Boot, un framework robusto y flexible para construir aplicaciones Java.
 
-## Objetivos de la entrega
-- Crear repositorio en Github + agregar colaboradores
-- Crear documento txt con los nombres -> Se puede encontrar el archivo como colaboradores.txt
-- Crear dos contenedores y realizar la comunicación entre ellos
+**Gestión de Dependencias:** Utilizamos Maven para gestionar las dependencias y el ciclo de vida del proyecto.
 
-# Desarrollo de los Objetivos:
-# Paso 1
-- Descargar la imagen de mysql:
-```bash
-  Docker pull mysql:latest
-```
+## Docker:
 
-# Paso 2
-- Construir la imagen de la API REST de Spring (Nuestra aplicación) usando un Dockerfile
+**Contenerización:** La aplicación Spring Boot se empaca en una imagen Docker. Esto garantiza que la aplicación se ejecute de manera consistente en diferentes entornos, eliminando problemas de compatibilidad.
 
-**Dockerfile:**
-```bash
-FROM amazoncorretto:17-alpine
-COPY target/*.jar app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
-```
-**Ejecutar comando:**
-```bash
-docker build -t my-app:v1 .
-```
-# Paso 3
-- Crear Docker-compose.yml para configurar la creacion y conexion de los contenedores:
+**Docker Compose:** Utilizamos Docker Compose para definir y ejecutar aplicaciones multicontenedor. Esto es particularmente útil para configurar servicios dependientes, como bases de datos.
 
-```
-services:
-  integracion-continua:
-    image: my-app:v1
-    ports:
-      - "8080:9191"
-    restart: always
-    depends_on:
-      my-mysql:
-        condition: service_healthy
-  my-mysql:
-    image: mysql:8.0.33
-    ports:
-      - "3307:3306"
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: course
-    restart: always
-    healthcheck:
-      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
-      timeout: 10s
-      retries: 10
-```
-**Y despues ejecutar el siguiente comando:**
-```bash
-docker compose -p integracion-continua up -d
-```
-# Detalle de la configuración, creación y conexión de los contenedores
+## Jenkins:
 
-## spring-api-rest:
+**Automatización de CI/CD:** Jenkins se configura para gestionar el ciclo de vida de integración y entrega continua. Esto incluye la construcción automática del proyecto, la ejecución de pruebas y el despliegue de la aplicación.
 
-- image: my-app:v1 indica que este servicio utilizará la imagen llamada my-app con la etiqueta v1.
+**Pipeline:** Definimos un pipeline de Jenkins usando un archivo Jenkinsfile, que incluye etapas para el checkout del código, construcción de la aplicación, ejecución de pruebas y despliegue en un entorno de pruebas o producción.
 
-- ports: 8080:9191 mapea el puerto 8080 en el host al puerto 9191 en el contenedor.
+# Flujo de Trabajo
+## Desarrollo:
 
-- restart: always asegura que el contenedor se reinicie siempre que se detenga.
+* Los desarrolladores realizan cambios en el código fuente y los suben al repositorio de Git.
 
-- depends_on: indica que este servicio depende de my-mysql y esperará a que el servicio my-mysql esté saludable antes de iniciarse.
+## Construcción y Pruebas:
 
-## my-mysql:
+* Jenkins detecta los cambios en el repositorio y ejecuta el pipeline.
 
-- image: mysql:8.0.33 indica que se usará la imagen de MySQL versión 8.0.33.
+* La aplicación se construye utilizando Maven.
 
-- ports: 3307:3306 mapea el puerto 3307 en el host al puerto 3306 en el contenedor.
+* Si las pruebas se ejecutan, Jenkins asegura que todo funcione correctamente antes de proceder al despliegue.
 
-- environment:
+## Despliegue:
 
-    - MYSQL_ROOT_PASSWORD: configura la contraseña de  root como root.
+* La imagen Docker se construye y se despliega utilizando Docker Compose.
 
-    - MYSQL_DATABASE: crea una base de datos llamada course.
+* La aplicación se ejecuta en contenedores Docker, facilitando el manejo de dependencias y configuraciones.
 
-- restart: always asegura que el contenedor se reinicie siempre que se detenga.
+## Notificaciones:
 
-- healthcheck: define una verificación de salud para el contenedor:
+* Jenkins envía notificaciones automáticas (por correo electrónico o Slack) sobre el estado de cada build y despliegue, manteniendo al equipo informado en todo momento.
 
-    - test: ejecuta el comando mysqladmin ping -h localhost para verificar que MySQL esté operativo.
+# Beneficios del Proyecto
+**Escalabilidad:** Docker permite escalar fácilmente la aplicación distribuyendo contenedores.
 
-    - timeout: espera 10 segundos para que la verificación se complete.
+**Automatización:** Jenkins automatiza el proceso de CI/CD, mejorando la eficiencia del equipo de desarrollo.
 
-    - retries: intenta la verificación 10 veces antes de considerarlo fallido.
-
-# Contenedores y comunicación
-**Este docker-compose.yml define dos contenedores:**
-
-- spring-api-rest
-
-- my-mysql
-
-## Comunicación entre contenedores
-spring-api-rest depende de my-mysql. Esta dependencia asegura que my-mysql esté en funcionamiento y saludable antes de que spring-api-rest se inicie.
-
-Los dos contenedores estarán en la misma red Docker por defecto, lo que les permitirá comunicarse entre sí utilizando los nombres de los servicios (spring-api-rest y my-mysql).
-
-En resumen, este archivo (docker-compose.yml) crea dos contenedores Docker: uno para una aplicación Spring API y otro para una base de datos MySQL, asegurando que la base de datos esté lista y saludable antes de que la aplicación intente conectarse a ella.
+**Portabilidad:** Con Docker, la aplicación puede ejecutarse en cualquier entorno que soporte contenedores Docker, asegurando consistencia.
