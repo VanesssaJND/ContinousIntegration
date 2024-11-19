@@ -2,16 +2,16 @@ pipeline {
     agent any
 
     stages {
-        stage('checkout') {
-            steps{
-                git branch:'main', url: 'https://github.com/VanesssaJND/ContinousIntegration.git'
-            }
-        }
         stage('Build') {
             steps {
                 dir('integracion-continua'){
                     bat 'mvn.cmd clean install -DskipTests'
                 }
+            }
+        }
+        stage('test'){
+            steps{
+             echo 'Test no disponibles debido a que la app no cuenta con ellos'
             }
         }
         stage('deploy'){
