@@ -42,7 +42,7 @@ Este proyecto tiene como objetivo desarrollar una API-REST utilizando el framewo
 
 ## Notificaciones:
 
-* Jenkins envía notificaciones automáticas (por correo electrónico o Slack) sobre el estado de cada build y despliegue, manteniendo al equipo informado en todo momento.
+* Jenkins envía notificaciones automáticas (por correo electrónico o Slack) sobre el estado de cada build y despliegue, manteniendo al equipo informado en todo momento ante cada evento.
 
 # Beneficios del Proyecto
 **Escalabilidad:** Docker permite escalar fácilmente la aplicación distribuyendo contenedores.
