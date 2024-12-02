@@ -1,4 +1,4 @@
-# Entrega Proyecto 2 - Escenario 5
+# Proyecto Integración Continua
 ## Introducción
 Este proyecto tiene como objetivo desarrollar una API-REST utilizando el framework Spring Boot, contenerizar la aplicación con Docker para asegurar su portabilidad y facilidad de despliegue, y automatizar el proceso de integración y despliegue continuo utilizando Jenkins.
 
