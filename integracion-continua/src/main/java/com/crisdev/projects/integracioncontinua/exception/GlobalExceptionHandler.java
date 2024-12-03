@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import io.sentry.Sentry;
 
 import java.time.LocalDateTime;
 
@@ -15,6 +16,8 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> handlerGenericException(Exception exception, HttpServletRequest request){
+
+        Sentry.captureException(exception);
 
         ApiError error = new ApiError();
         error.setMessage("Error interno en el servidor, vuelva a intentarlo");
