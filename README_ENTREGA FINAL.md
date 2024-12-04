@@ -4,7 +4,7 @@ Este proyecto tiene como objetivo contenerizar una aplicación utilizando Docker
 
 # Componentes del Proyecto
 
-#Docker
+# Docker
 
 Contenerización:
 
