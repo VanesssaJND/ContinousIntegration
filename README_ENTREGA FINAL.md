@@ -1,6 +1,6 @@
 # Introducción
 
-## Este proyecto tiene como objetivo contenerizar una aplicación utilizando Docker, asegurando su portabilidad y facilidad de despliegue en cualquier entorno. La aplicación consiste en una API-REST desarrollada con Spring Boot, junto con la integración de servicios necesarios, como una base de datos. Para gestionar los contenedores y facilitar su configuración, se utiliza Docker Compose. El proyecto también incluye pruebas de conexión entre contenedores, demostrando su correcto funcionamiento.
+Este proyecto tiene como objetivo contenerizar una aplicación utilizando Docker, asegurando su portabilidad y facilidad de despliegue en cualquier entorno. La aplicación consiste en una API-REST desarrollada con Spring Boot, junto con la integración de servicios necesarios, como una base de datos. Para gestionar los contenedores y facilitar su configuración, se utiliza Docker Compose. El proyecto también incluye pruebas de conexión entre contenedores, demostrando su correcto funcionamiento.
 
 # Componentes del Proyecto
 
