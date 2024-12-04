@@ -1,17 +1,23 @@
-Entrega Proyecto Docker
 Introducción
+
 Este proyecto tiene como objetivo contenerizar una aplicación utilizando Docker, asegurando su portabilidad y facilidad de despliegue en cualquier entorno. La aplicación consiste en una API-REST desarrollada con Spring Boot, junto con la integración de servicios necesarios, como una base de datos. Para gestionar los contenedores y facilitar su configuración, se utiliza Docker Compose. El proyecto también incluye pruebas de conexión entre contenedores, demostrando su correcto funcionamiento.
 
 Componentes del Proyecto
+
 Docker
+
 Contenerización:
+
 El proyecto se encuentra contenerizado utilizando Docker, lo que asegura que la aplicación se ejecute de manera consistente sin importar el entorno. Esto elimina problemas de compatibilidad que pueden surgir en entornos de desarrollo, pruebas y producción.
 
 Docker Compose:
+
 Docker Compose se utiliza para gestionar múltiples contenedores dentro del mismo entorno. Define la configuración de contenedores en un archivo docker-compose.yml, lo que facilita la ejecución de la aplicación junto con los servicios dependientes, como bases de datos.
 
 Archivos principales:
+
 docker-compose.yml:
+
 Este archivo contiene la configuración necesaria para ejecutar los contenedores de la aplicación y la base de datos. Aquí se especifican las redes, volúmenes y servicios involucrados.
 
 Ejemplo de archivo docker-compose.yml:
