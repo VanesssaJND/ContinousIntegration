@@ -1,4 +1,4 @@
-# Entrega Proyecto 1 - Escenario 3
+# Entrega Proyecto
 
 ## Contexto del proyecto
 
